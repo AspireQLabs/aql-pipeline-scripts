@@ -17,10 +17,7 @@ if [ -z "$WEBHOOK" ]; then
   exit 1
 fi
 
-# Escape double quotes and backslashes in the message
-ESCAPED_MESSAGE=$(echo "$MESSAGE" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g')
-
-PAYLOAD="{\"content\": \"$ESCAPED_MESSAGE\"}"
+PAYLOAD=$(jq -n --arg content "$MESSAGE" '{content: $content}')
 
 RESPONSE=$(curl -s -w "%{http_code}" -o /dev/null \
   -H "Content-Type: application/json" \
