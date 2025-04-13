@@ -26,6 +26,8 @@ RESPONSE=$(curl -s -w "%{http_code}" -o /dev/null \
   "$WEBHOOK"
 )
 
+echo $PAYLOAD
+
 if [ "$RESPONSE" -ne 204 ]; then
   echo "Failed to send message to Discord (HTTP $RESPONSE)"
   exit 1
