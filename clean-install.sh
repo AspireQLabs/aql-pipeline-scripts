@@ -24,7 +24,7 @@ for module in "${MODULES[@]}"; do
   echo "Building module: $module"
   (
     cd "$module" || { echo "❌ Module $module not found"; exit 1; }
-    mvn clean install "${MVN_ARGS[@]}"
+    ./mvnw clean install "${MVN_ARGS[@]}"
   ) || exit 1
 done
 
