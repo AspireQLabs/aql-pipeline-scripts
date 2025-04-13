@@ -19,13 +19,10 @@ fi
 
 PAYLOAD=$(jq -n --arg content "$MESSAGE" '{content: $content}')
 
-RESPONSE=$(curl -s -w "%{http_code}" -o /dev/null \
-  -H "Content-Type: application/json" \
-  -X POST \
-  -d "$PAYLOAD" \
-  $WEBHOOK
-)
-
+RESPONSE=$(curl -s -w "%{http_code}" -o /dev/null -H "Content-Type: application/json" -X POST -d "$PAYLOAD" $WEBHOOK)
+echo $WEBHOOK
+echo $PAYLOAD
+echo $RESPONSE
 
 if [ "$RESPONSE" -ne 204 ]; then
   echo "Failed to send message to Discord (HTTP $RESPONSE)"
