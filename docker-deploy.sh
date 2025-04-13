@@ -9,7 +9,7 @@ set -e
 
 # === DEFAULT CONFIGURATION ===
 COMPOSE_FILE="docker-compose.yml"
-CLEAN_SCRIPT="./aql-pipeline-scripts/clean-containers.sh"
+CLEAN_SCRIPT="./aql-pipeline-scripts/container-cleanup.sh"
 SERVICES_TO_CLEAN=()
 
 # === PARSE ARGS ===
