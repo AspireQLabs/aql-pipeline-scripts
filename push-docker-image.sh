@@ -10,6 +10,7 @@ IMAGE_BASE="${IMAGE_BASE:-my-docker-org/my-app}"
 IMAGE_TAG="${IMAGE_TAG:-latest}"
 MODULES=()
 
+
 # === USAGE ===
 usage() {
   echo "Usage: $0 --modules service1,service2,... [--image-base name] [--tag tag]"
