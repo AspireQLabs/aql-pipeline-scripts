@@ -17,6 +17,13 @@ if [ -z "$WEBHOOK" ]; then
   exit 1
 fi
 
-curl -H "Content-Type: application/json" \
-     -X POST \
-     -d "{\"content\
+PAYLOAD=$(jq -n --arg content "$MESSAGE" '{content: $content}')
+
+RESPONSE=$(curl -s -w "%{http_code}" -o /dev/null -H "Content-Type: application/json" -X POST -d "$PAYLOAD" $WEBHOOK)
+
+if [ "$RESPONSE" -ne 204 ]; then
+  echo "Failed to send message to Discord (HTTP $RESPONSE)"
+  exit 1
+else
+  echo "Message sent to Discord successfully."
+fi
